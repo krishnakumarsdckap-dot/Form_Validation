@@ -81,12 +81,14 @@
                     parent.classList.add("required")
                 }
                 else if (element.value !== "") {
+                    parent.classList.add("success")
                     parent.classList.remove("required")
                 }
                 if (element.classList.contains("Email") && element.value !== "") {
                     let mail = element.value;
                     if (!mail.includes("@") || !mail.includes(".")) {
                         parent.classList.add("required");
+                        parent.classList.remove("success")
                         parent.querySelector("p").innerText =
                             `Enter the email properly using "@" and "."`;
                     }
@@ -95,6 +97,7 @@
                     const password = document.querySelector(".PassWord").value;
                     if (password !== element.value) {
                         parent.classList.add("required");
+                        parent.classList.remove("success")
                         parent.querySelector("p").innerText = "Passwords do not match";
                     }
                     if (password === element.value) {
