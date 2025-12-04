@@ -73,6 +73,7 @@
     <script>
         document.querySelector("#form").addEventListener("submit", btn);
         function btn() {
+            let requ = document.querySelectorAll(".formGrp")
             let input = document.querySelectorAll("input")
             input.forEach(element => {
                 let x = false;
@@ -109,6 +110,9 @@
                     alert("Your Form Submitted Successfully ")
                     input.forEach(element => {
                         element.value = ""
+                    })
+                    requ.forEach(element => {
+                        element.classList.remove("success")
                     })
                     return;
                 }
