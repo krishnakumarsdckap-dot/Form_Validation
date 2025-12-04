@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Form Validation</title>
+</head>
+
+<body>
+    <div class="container">
+        <form action="#" id="form" autocomplete="off">
+            <h3>Registration Form</h3>
+            <div class="formGrp">
+                <label for="userName">User Name</label>
+                <input type="text" class="userName" id="userName" placeholder="Enter UserName" data-name="UserName">
+                <p>Required</p>
+            </div>
+            <div class="formGrp">
+                <label for="Email">Email</label>
+                <input type="text" class="Email" id="Email" placeholder="Enter Email" data-name="Email">
+                <p>Required</p>
+            </div>
+            <div class="formGrp">
+                <label for="PassWord">Password</label>
+                <input type="text" class="PassWord" id="PassWord" placeholder="Enter Password" data-name="Password">
+                <p>Required</p>
+            </div>
+            <div class="formGrp">
+                <label for="Retype">Retype Password</label>
+                <input type="text" class="Retype" id="Retype" placeholder="Enter Retype Password"
+                    data-name="Retype Passwords">
+                <p>Required</p>
+            </div>
+            <button type="submit">Register now</button>
+        </form>
+    </div>
+    <!-- <script>
+        document.querySelector("#form").addEventListener("submit", (event)=>{
+            event.preventDefault();
+            let userName = document.querySelector(".userName").value
+            let Email = document.querySelector(".Email").value
+            let PassWord = document.querySelector(".PassWord").value
+            let Retype = document.querySelector(".Retype").value
+            let arr = [userName, Email, PassWord, Retype]
+            let requ = document.querySelectorAll(".formGrp")
+
+            for (let i = 0; i < arr.length; i++) {
+                if (arr[i] === "") {
+                    requ[i].classList.add("required")
+                }
+                else if (arr[i] !== "") {
+                    requ[i].classList.remove("required")
+                }
+            }
+            let mails = Email.split("")
+            if (Email !== "") {
+                if (!mails.includes("@") || !mails.includes(".")) {
+                    requ[1].classList.add("required")
+                    requ[1].querySelector("p").innerText = `Enter the email properly using "@" and "."`
+                }
+            }
+            if (PassWord !== Retype) {
+                Retype.innerText = ""
+                requ[3].classList.add("required")
+                requ[3].querySelector("p").innerText = `Doesn't Match`
+            }
+        });
+    </script> -->
+
+    <script>
+        document.querySelector("#form").addEventListener("submit", btn);
+        function btn() {
+            let input = document.querySelectorAll("input")
+            input.forEach(element => {
+                let x = false;
+                let parent = element.parentElement
+                if (element.value === "") {
+                    parent.classList.add("required")
+                }
+                else if (element.value !== "") {
+                    parent.classList.remove("required")
+                }
+                if (element.classList.contains("Email") && element.value !== "") {
+                    let mail = element.value;
+                    if (!mail.includes("@") || !mail.includes(".")) {
+                        parent.classList.add("required");
+                        parent.querySelector("p").innerText =
+                            `Enter the email properly using "@" and "."`;
+                    }
+                }
+                if (element.classList.contains("Retype") && element.value !== "") {
+                    const password = document.querySelector(".PassWord").value;
+                    if (password !== element.value) {
+                        parent.classList.add("required");
+                        parent.querySelector("p").innerText = "Passwords do not match";
+                    }
+                    if (password === element.value) {
+                        parent.classList.remove("required")
+                        x = true;
+                    }
+                }
+                if (x) {
+                    alert("Your Form Submitted Successfully ")
+                    return
+                }
+            });
+        }
+    </script>
+</body>
+
+</html>
